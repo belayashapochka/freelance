@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Все аукционы</title>
+<link rel="stylesheet" href={{url_for('static', filename='auction.css')}}>
+<style>
+    body{
+    text-align: center;
+    }
+
+    h1{
+        text-align: center;
+    }
+
+    table{
+        width: 60%;
+        margin-left: auto;
+        margin-right: auto;
+
+    }
+
+
+    .buttonClass{
+    width: 200px;
+    height: 70px;
+    margin-top: 5%;
+    border-color: rgb(144, 144, 136);
+    background-color: rgb(144, 144, 136);
+    border-radius: 15px;
+    }
+</style>
+</head>
+<body>
+    {% for auction in collection_auctions: %}
+        <h1>Аукцион №{{auction[0].auctionId}}</h1>
+        <div class="pastAuction">
+            <p>Название: {{auction[0].title}}</p>
+            <p>Описание: {{auction[0].description}}</p>
+            <p>Условие оплаты: {{auction[0].payType}}</p>
+            <p>Время начала: {{auction[0].timeStart}}</p>
+            <p>Последняя цена: {{auction[0].price}}</p>
+            <h1>Победитель</h1>
+        <table border="1">
+            <tr>
+              <th>TG id</th>
+              <th>TG username</th>
+              <th>Имя Фамилия</th>
+              <th>Телефон</th>
+              <th>Компания</th>
+            </tr>
+            {% if auction[1]: %}
+            <tr>
+                <th>{{auction[1].tgId}}</th>
+                <th>{{auction[1].tgName}}</th>
+                <th>{{auction[1].name}}</th>
+                <th>{{auction[1].phone}}</th>
+                <th>{{auction[1].company}}</th>
+              </tr>
+            {%endif%}
+            </table> 
+            <a href="/bids/{{auction[0].auctionId}}">
+                <button class="buttonClass">
+                    История ставок </button>
+                </a> 
+        <hr>
+        {% endfor %}
+
+<a href="/main">
+<button class="buttonClass">
+    Назад </button>
+</a>    
+</body>
+</html>

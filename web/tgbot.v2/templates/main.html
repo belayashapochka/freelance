@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Главная страница</title>
+<link rel="stylesheet" href={{url_for('static', filename='main.css')}}/>
+</head>
+<body>
+<div>
+    <a href="/auctions">
+        <button>
+            Предыдущие аукционы
+        </button>
+    </a>
+    <br>
+<a href="/auction_create">
+    <button>
+        Начать аукцион
+    </button>
+</a>
+<br>
+<a href="/users">
+    <button>
+        Просмотреть базу пользователей
+    </button>
+</a><br>
+<a href="/regulations">
+    <button>
+        Изменить правила
+    </button>
+</a><br>
+<a href="/media">
+    <button>
+        Изменить гифку и фото
+    </button>
+</a><br>
+</div>
+</body>
+</html>

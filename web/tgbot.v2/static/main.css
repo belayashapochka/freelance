@@ -1,0 +1,18 @@
+body{
+    text-align: center;
+}
+
+button{
+    width: 200px;
+    height: 70px;
+    margin-left: auto;
+    margin-right: auto;
+    margin: 1%;
+    border-color: rgb(144, 144, 136);
+    background-color: rgb(144, 144, 136);
+    border-radius: 15px;
+}
+
+div{
+    margin: 20%;
+}

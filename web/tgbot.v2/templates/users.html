@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Таблица пользователей</title>
+<!-- <link rel="stylesheet" href={{ url_for('static', filename='main.css') }}> -->
+<style>
+    body{
+    text-align: center;
+    }
+
+    h1{
+        text-align: center;
+        margin-top: 5%;
+    }
+
+    table{
+        width: 60%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 5%;
+    }
+
+    .NoAuth{
+        background-color: red;
+    }
+
+    .IsAuth{
+        background-color: green;
+    }
+
+    a:link{
+        color: black;
+    }
+
+    a:visited {
+        color: black;
+    }
+
+    a:hover {
+        color: rgb(62, 61, 62);
+    }
+
+    a:active {
+        color: rgb(2, 2, 47);
+    }
+
+    button{
+    width: 200px;
+    height: 70px;
+    margin-top: 5%;
+    border-color: rgb(144, 144, 136);
+    background-color: rgb(144, 144, 136);
+    border-radius: 15px;
+    }
+</style>
+</head>
+<body>
+    <h1>Таблица пользователей</h1>
+    <div>
+        <table border="1">
+            <tr>
+              <th>TG id</th>
+              <th>TG username</th>
+              <th>Имя Фамилия</th>
+              <th>Телефон</th>
+              <th>Компания</th>
+              <th>Авторизация</th>
+            </tr>
+            {% for user in collection_users: %}
+            <tr>
+                <th>{{user.tgId}}</th>
+                <th>{{user.tgName}}</th>
+                <th>{{user.name}}</th>
+                <th>{{user.phone}}</th>
+                <th>{{user.company}}</th>
+                {% if user.isAuth: %}
+                <th class="IsAuth">Подвержден</th>
+                {% else %}
+                <th class="NoAuth"><a href="/users/{{user.tgId}}">Подтвердить</a></th>
+                {% endif %}
+              </tr>
+              {% endfor %}
+            </table> 
+    </div> 
+    
+    <a href="/main">
+        <button>
+            Вернуться назад
+        </button>
+    </a>
+</body>
+</html>
+

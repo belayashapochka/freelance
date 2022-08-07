@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Аукцион</title>
+<link rel="stylesheet" href={{url_for('static', filename='auction.css')}}>
+<style>
+    body{
+    text-align: center;
+    }
+
+    h1{
+        text-align: center;
+    }
+
+    table{
+        width: 60%;
+        margin-left: auto;
+        margin-right: auto;
+
+    }
+
+
+    .buttonClass{
+    width: 200px;
+    height: 70px;
+    margin-top: 5%;
+    border-color: rgb(144, 144, 136);
+    background-color: rgb(144, 144, 136);
+    border-radius: 15px;
+    }
+</style>
+</head>
+<body>
+<h1>Предыдущий аукцион</h1>
+{% if auction: %}
+<div class="pastAuction">
+    <p>Название: {{auction.title}}</p>
+    <p>Описание: {{auction.description}}</p>
+    <p>Время начала:{{auction.timeStart}}</p>
+    <p>Последняя цена: {{auction.price}}</p>
+    {%if auction.winner=="None" %}
+        <p>Победитель: Аукцион еще не начался</p>
+        <a href="/ping_auction"><button class="startAuction">Начать аукцион</button></a>
+    {% elif auction.winner=="$begin$" %}
+        <p>Победитель: Аукцион еще не закончился</p>
+        <h1>Таблица пользователей</h1>
+    <div>
+        <table border="1">
+            <tr>
+              <th>TG id</th>
+              <th>TG username</th>
+              <th>Имя Фамилия</th>
+              <th>Телефон</th>
+              <th>Компания</th>
+            </tr>
+            {% for user in collection_users: %}
+            <tr>
+                <th>{{user.tgId}}</th>
+                <th>{{user.tgName}}</th>
+                <th>{{user.name}}</th>
+                <th>{{user.phone}}</th>
+                <th>{{user.company}}</th>
+              </tr>
+            {%endfor%}
+            </table> 
+    </div> 
+    <a href="/auction_end">
+        <button >
+            Закончить аукцион</button>
+        </a> 
+    {% else %}    
+        <p>Победитель: {{auction.winner}}</p>
+    {%endif%}
+</div>
+{% endif %}
+<hr>
+    <h1>Новый аукцион</h1>
+    <form class="form" method="post" enctype="multipart/form-data">
+        <label>Введите название</label><br>
+        <input type="text" name="title"><br>
+        <label>Напишите описание</label><br>
+        <textarea name="description"></textarea><br>
+        <label>Условие оплаты</label><br>
+        <textarea name="payType"></textarea><br>
+        <label>Введите вес лота (в кг)</label><br>
+        <input type="number" name="weight"><br>
+        <label>Загрузите фото</label><br>
+        <input type="file" id="myFile" name="file1">
+        <input type="file" id="myFile" name="file2">
+        <input type="file" id="myFile" name="file3">
+        <input type="file" id="myFile" name="file4">
+        <input type="file" id="myFile" name="file5">
+        <input type="file" id="myFile" name="file6">
+        <input type="file" id="myFile" name="file7">
+        <input type="file" id="myFile" name="file8">
+        <input type="file" id="myFile" name="file9">
+        <input type="file" id="myFile" name="file10"><br>
+        <label>Введите время старта</label><br>
+        <input type="datetime-local" name="date"><br>
+        <label>Введите длительность аукциона (в минутах)</label><br>
+        <input type="number" name="time"><br>
+        <label>Введите начальную стоимость лота (руб/кг)</label><br>
+        <input type="number" name="price"><br>
+        <input type="checkbox" name="gif"><label>Отправлять гифку</label><br>
+        <input type="checkbox" name="photo"><label>Отправлять фото</label><br>
+        <input type="submit"><br>
+      </form>
+<hr>
+<a href="/main">
+<button class="buttonClass">
+    Назад </button>
+</a>    
+</body>
+</html>
